@@ -1,7 +1,7 @@
 from Page.main_page import Main_Page
 from Page.search_page import Search_Page
 from Data.test_data import test_data
-from Lib.custom_logger import logger
+import logging
 
 
 def test(driver):
@@ -16,5 +16,5 @@ def test(driver):
         splited = ((price.text).split(" "))[0].split("$")
         number = int(splited[1])
         assert int(test_data["price_from"]) <= number <= int(
-            test_data["price_to"]), logger("Fail", True)
-    logger("Test is passed!! The prices are in selected range.")
+            test_data["price_to"]), logging.error("Fail")
+    logging.error("Test is passed!! The prices are in selected range.")

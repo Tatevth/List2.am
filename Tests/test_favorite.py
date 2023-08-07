@@ -1,7 +1,7 @@
 from Page.main_page import Main_Page
 from Page.favorite_page import Favorite_Page
 from Data.test_data import test_data
-from Lib.custom_logger import logger
+import logging
 
 
 def test(driver):
@@ -11,5 +11,5 @@ def test(driver):
     main_page.open_page()
     main_page.choose_language()
     login_form = favorite_page.get_login_form()
-    assert login_form, logger("Test is failed.", True)
-    logger("Test is passed!! The pop-up is opened")
+    assert login_form, logging.error("Test is failed.")
+    logging.info("Test is passed!! The pop-up is opened")

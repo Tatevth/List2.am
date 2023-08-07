@@ -2,11 +2,6 @@ from selenium import webdriver
 import pytest
 import logging
 
-logging.basicConfig(filename='test_run.log',
-                    filemode='a+', format='%(created)f - %(levelname)s - %(message)s',
-                    level=logging.INFO
-                    )
-
 
 @pytest.fixture(autouse=True)
 def driver():
@@ -16,12 +11,9 @@ def driver():
     driver.quit()
 
 
-@pytest.fixture
-def logger(msg="", error=False):
-    if error:
-        logging.error(msg)
-    else:
-        logging.info(msg)
-    yield logger
+def pytest_configure():
 
-# Anna - if you use custom logger you could remove logger from conftest
+    logging.basicConfig(filename='test_run.log',
+                        filemode='a+', format='%(created)f - %(levelname)s - %(message)s',
+                        level=logging.INFO
+                        )

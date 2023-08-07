@@ -1,8 +1,7 @@
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
-from Lib.custom_logger import logger
-
+import logging
 
 class General_Helper():
 
@@ -15,7 +14,7 @@ class General_Helper():
                 EC.visibility_of_element_located(loc))
             return elem
         except Exception as e:
-            logger(f"Element not found", True)
+            logging.error(f"Element not found")
 
     def find_elements(self, loc, timeout=60):
         try:
@@ -23,22 +22,22 @@ class General_Helper():
                 EC.visibility_of_all_elements_located(loc))
             return elem
         except Exception as e:
-            logger(f"Element not found", True)
+            logging.error(f"Element not found")
 
     def find_and_click(self, loc, timeout=60):
         elem = self.find(loc)
         try:
             elem.click()
-            logger(f"Element is clickable")
+            logging.info(f"Element is clickable")
         except Exception as e:
-            logger("Could not click on element", True)
+            logging.error("Could not click on element")
 
     def find_and_send_keys(self, loc, text, timeout=60):
         elem = self.find(loc, timeout=timeout)
         try:
             elem.send_keys(text)
         except Exception as e:
-            logger(f"Could not input {text} in the field", True)
+            logging.error(f"Could not input {text} in the field")
 
     def find_text(self, loc, timeout=60):
         elem = self.find(loc, timeout=timeout)
